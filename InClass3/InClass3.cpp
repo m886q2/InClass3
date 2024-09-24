@@ -1,36 +1,34 @@
+//Skornprobst's code to read a list of numbers (spaced with nothing else but numbers) from fahrenheit.txt
+// and convert that to celcius. It then outputs that to celcius.txt.   09/24/2024 revision
+#include <iostream>    //cin/cout
+#include <fstream>     //file IO
+#include <iomanip>     //things to screw with formating
 
-#include <iostream> 
-#include <fstream>
-#include <iomanip>
-#include <string> 
+using namespace std;   // no more putting std:: behind cin and out                           
 
-
-using namespace std;                              //Line 2 
-
-int main()                                        //Line 3
+int main()                                        
 {
+    //Sets up memory to hold data
     ifstream infile;
     ofstream outfile;
-    double f1, f2, f3, f4, f5;
-    double c1, c2, c3, c4, c5;
+    float in, out;                                                  
 
-
+    //Opens both files and formats the output to display numbers using decimals, trailing 0s, and two decimals
     infile.open("fahrenheit.txt");
     outfile.open("celcius.txt");
-    outfile << fixed << showpoint;                  //Step 4
-    outfile << setprecision(2);
-    infile >> f1 >> f2 >> f3 >> f4 >> f5;
-    c1 = (f1 - 32) * 5 / 9;
-    c2 = (f2 - 32) * 5 / 9;
-    c3 = (f3 - 32) * 5 / 9;
-    c4 = (f4 - 32) * 5 / 9;
-    c5 = (f5 - 32) * 5 / 9;
-    outfile << c1 << " " << c2 << " " << c3 << " " << c4 << " " << c5;
-   // cout << c1 << " " << c2 << " " << c3 << " " << c4 << " " << c5;
+    outfile << fixed << showpoint << setprecision(2);
+
+    //Reads a number from fahrenheit.txt, converts it, then places that result into celcius.txt infinitely until all numbers have been processed.
+    while (infile >> in)
+    {
+         out = (in - 32) * 5 / 9;
+         outfile << out << " ";
+    }
+      
+    //Confirmation message and closing files
+    cout << "Conversion Complete";
     infile.close();
     outfile.close();
-
-    return 0;
 }
 
 
